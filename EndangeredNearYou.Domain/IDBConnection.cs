@@ -1,4 +1,4 @@
-﻿namespace FinalProject
+﻿namespace EndangeredNearYou.Domain
 {
     internal class IDBConnection
     {

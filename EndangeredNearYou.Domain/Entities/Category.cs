@@ -1,4 +1,4 @@
-﻿namespace FinalProject.Models
+﻿namespace EndangeredNearYou.Domain.Entities
 {
     public class Category
     {

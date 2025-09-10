@@ -1,4 +1,4 @@
-namespace FinalProject.Models
+namespace EndangeredNearYou.Web.Models
 {
     public class ErrorViewModel
     {

@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Product>
+﻿@using EndangeredNearYou.Web.Models
+@model IEnumerable<ProductViewModel>
 
 <h2>Products</h2>
 
@@ -19,10 +20,10 @@
     @foreach (var product in @Model)
     {
         <tr>
-            <td><a href=/Product/ViewProduct/@product.ProductID>@product.ProductID</a></td>
+            <td><a href=/Product/ViewProduct/@product.ProductId>@product.ProductId</a></td>
             <td>@product.Name</td>
             <td>@product.Price</td>
-            <td>@product.CategoryID</td>
+            <td>@product.CategoryId</td>
             <td>@product.OnSale</td>
             <td>@product.StockLevel</td>
         </tr>

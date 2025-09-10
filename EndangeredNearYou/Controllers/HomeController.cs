@@ -1,8 +1,8 @@
-using System.Diagnostics;
-using FinalProject.Models;
+using EndangeredNearYou.Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
-namespace FinalProject.Controllers
+namespace EndangeredNearYou.Web.Controllers
 {
     public class HomeController : Controller
     {
