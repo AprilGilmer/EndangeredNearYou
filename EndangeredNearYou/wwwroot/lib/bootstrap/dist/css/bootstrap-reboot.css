@@ -59,12 +59,14 @@ h1 {
 }
 
 h2 {
-  font-size: calc(1.325rem + 0.9vw);
+    font-size: calc(1.325rem + 0.9vw);
+    color: #D94F30;
 }
 @media (min-width: 1200px) {
-  h2 {
-    font-size: 2rem;
-  }
+    h2 {
+        font-size: 2rem;
+        color: #D94F30;
+    }
 }
 
 h3 {

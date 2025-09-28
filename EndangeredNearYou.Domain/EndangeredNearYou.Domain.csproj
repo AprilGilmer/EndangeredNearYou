@@ -104,8 +104,8 @@
   <ItemGroup>
     <Compile Include="Entities\Category.cs" />
     <Compile Include="IDBConnection.cs" />
-    <Compile Include="Entities\Product.cs" />
-    <Compile Include="Repositories\ProductRepository.cs" />
+    <Compile Include="Entities\Location.cs" />
+    <Compile Include="Repositories\LocationRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,21 @@
+﻿@using EndangeredNearYou.Infrastructure.Classes
+@model Observations_SpeciesCounts
+
+<h1>Species Details</h1>
+
+@if (@Model.taxon == null)
+{
+    <h2>Unavailable</h2>
+}
+else
+{
+    <ul>
+        <li>@Model.taxon.name</li>
+        <li>@Model.taxon.observations_count</li>
+        <li>@Model.taxon.conservation_Status</li>
+        <li>@Model.taxon.default_photo.url</li>
+        <li>@Model.taxon.default_photo.attribution</li>
+        <li>@Model.taxon.preferred_common_name</li>
+        <li>@Model.taxon.extinct</li>
+    </ul>
+}

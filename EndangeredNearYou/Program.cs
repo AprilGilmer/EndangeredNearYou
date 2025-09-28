@@ -1,4 +1,6 @@
 using EndangeredNearYou.Domain.Repositories;
+using EndangeredNearYou.Infrastructure.Classes;
+using EndangeredNearYou.Infrastructure.Services;
 using MySql.Data.MySqlClient;
 using System.Data;
 
@@ -7,14 +9,30 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddDistributedMemoryCache(); // Needed for session
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Session expiration
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 builder.Services.AddScoped<IDbConnection>((s) =>
 {
-    IDbConnection conn = new MySqlConnection(builder.Configuration.GetConnectionString("bestbuy"));
+    IDbConnection conn = new MySqlConnection(builder.Configuration.GetConnectionString("endangered_near_you"));
     conn.Open();
     return conn;
 });
 
-builder.Services.AddTransient<IProductRepository, ProductRepository>();
+builder.Services.Configure<AppSettings>(
+    builder.Configuration.GetSection("ApiKeys"));
+
+// Add services & repositories
+builder.Services.AddHttpClient<INaturalistApiClient>(client =>
+{
+    client.DefaultRequestHeaders.Add("Accept", "application/json");
+});
+builder.Services.AddTransient<ILocationRepository, LocationRepository>();
 
 var app = builder.Build();
 
@@ -32,6 +50,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseSession(); // Must be before MapControllerRoute
 
 app.MapControllerRoute(
     name: "default",

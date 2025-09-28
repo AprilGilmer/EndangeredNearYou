@@ -1,5 +1,44 @@
+.navbar {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    background-color: #197487;
+}
+
+.bg-white {
+    background-color: #D6D9C5 !important;
+}
+
+element.style {
+}
+
+.navbar-light .navbar-brand:focus, .navbar-light .navbar-brand:hover {
+    color: #0D0D0D;
+}
+
+.navbar-light .navbar-brand {
+    color: #D94F30;
+}
+
+a:hover {
+    color: #198754;
+}
+
+.navbar-brand {
+    padding-top: .3125rem;
+    padding-bottom: .3125rem;
+    margin-right: 1rem;
+    font-size: 1.25rem;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
@@ -8,9 +47,14 @@ html {
   }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+.btn, .btn:active {
+    background-color: #D94F30;
 }
+
+    .btn:hover, .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+        box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #D9886A;
+        background-color: #D6D9C5;
+    }
 
 html {
   position: relative;
@@ -18,5 +62,35 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    margin: 0;
+    font-family: var(--bs-body-font-family);
+    font-size: var(--bs-body-font-size);
+    font-weight: var(--bs-body-font-weight);
+    line-height: var(--bs-body-line-height);
+    color: #0D0D0D;
+    text-align: var(--bs-body-text-align);
+    background-color: #F2F1EC;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+.species-image-preview {
+    width: 90px;
+    height: 90px;
+}
+
+h2 {
+    color: #D94F30 !important;
+}
+
+.text-muted {
+    --bs-text-opacity: 1;
+    color: #0D0D0D !important;
+}
+
+.table-hover {
+    background-color: #f2f2f2 !important; /* highlight color */
+    cursor: pointer !important;
 }

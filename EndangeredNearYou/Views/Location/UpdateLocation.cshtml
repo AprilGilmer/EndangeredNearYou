@@ -1,11 +1,11 @@
 ﻿@using EndangeredNearYou.Web.Models
-@model ProductViewModel
+@model LocationViewModel
 
 <h2>Update @Model.Name</h2>
 
-@using (Html.BeginForm("UpdateProductToDatabase", "Product", "Post"))
+@using (Html.BeginForm("UpdateLocationToDatabase", "Location", "Post"))
 {
-    <input asp-for="ProductId" type="hidden" value="@Model.ProductId" />
+    <input asp-for="LocationId" type="hidden" value="@Model.LocationId" />
 
     <label asp-for="Name" class="control-label">Name</label>
     <input type="text" name="Name" class="form-control" value="@Model.Name" />
@@ -13,5 +13,5 @@
     <label asp-for="Price" class="control-label">Price</label>
     <input type="number" step="0.01" name="Price" class="form-control" value="@Model.Price" />
 
-    <input type="submit" value="Update Product" class="btn btn-primary" />
+    <input type="submit" value="Update Location" class="btn btn-primary" />
 }

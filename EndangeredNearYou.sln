@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EndangeredNearYou.Test", "E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EndangeredNearYou.Domain", "EndangeredNearYou.Domain\EndangeredNearYou.Domain.csproj", "{8F5E4742-14A7-4F76-9921-F6270B0C7358}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EndangeredNearYou.Infrastructure", "EndangeredNearYou.Infrastructure\EndangeredNearYou.Infrastructure.csproj", "{FAD10970-8E99-4881-9ADC-E51939D979F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{8F5E4742-14A7-4F76-9921-F6270B0C7358}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F5E4742-14A7-4F76-9921-F6270B0C7358}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F5E4742-14A7-4F76-9921-F6270B0C7358}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAD10970-8E99-4881-9ADC-E51939D979F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAD10970-8E99-4881-9ADC-E51939D979F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAD10970-8E99-4881-9ADC-E51939D979F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAD10970-8E99-4881-9ADC-E51939D979F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

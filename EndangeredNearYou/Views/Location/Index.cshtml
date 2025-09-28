@@ -1,0 +1,32 @@
+﻿@using EndangeredNearYou.Web.Models
+@model IEnumerable<LocationViewModel>
+
+<h2>Locations</h2>
+
+<div style="display: block">
+    <a href="/Location/InsertLocation/">Create a New Location</a>
+</div>
+
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Category ID</th>
+        <th>On Sale</th>
+        <th>Stock Level</th>
+    </tr>
+
+    @foreach (var location in @Model)
+    {
+        <tr>
+            <td><a href=/Location/ViewLocation/@location.LocationId>@location.LocationId</a></td>
+            <td>@location.Name</td>
+            <td>@location.Price</td>
+            <td>@location.CategoryId</td>
+            <td>@location.OnSale</td>
+            <td>@location.StockLevel</td>
+        </tr>
+    }
+
+</table>
