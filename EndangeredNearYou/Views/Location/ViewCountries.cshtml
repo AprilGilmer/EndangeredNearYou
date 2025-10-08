@@ -1,0 +1,20 @@
+﻿@using EndangeredNearYou.Infrastructure.Classes
+@model IEnumerable<Country>
+
+<h2>Countries</h2>
+
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Code</th>
+    </tr>
+
+    @foreach (var country in @Model)
+    {
+        <tr>
+            <td><a href=/Location/ViewCitiesByCountry/@country.Two_Letter_Country_Code>@country.Country_Name</a></td>
+            <td>@country.Two_Letter_Country_Code</td>
+        </tr>
+    }
+
+</table>

@@ -8,7 +8,7 @@ namespace EndangeredNearYou.Web.Controllers
     public class SpeciesController : Controller
     {
         private readonly AppSettings _appSettings;
-        private INaturalistApiClient _iNaturalistApiClient;
+        private readonly INaturalistApiClient _iNaturalistApiClient;
 
         public SpeciesController(IOptions<AppSettings> key)
         {

@@ -9,13 +9,13 @@ namespace EndangeredNearYou.Web.Helpers
         {
             var model = new LocationViewModel()
             {
-                LocationId = location.cityId,
+                City_Id = location.City_Id,
                 Name = location.Name,
-                Price = location.Price,
-                CategoryId = location.CategoryId,
-                OnSale = location.OnSale,
-                StockLevel = location.StockLevel,
-                Categories = location.Categories,
+                Country_Code = location.Country_Code,
+                State = location.State,
+                County = location.County,
+                Latitude = location.Latitude,
+                Longitude = location.Longitude
             };
 
             return model;
@@ -39,13 +39,12 @@ namespace EndangeredNearYou.Web.Helpers
         {
             var location = new Location()
             {
-                cityId = model.LocationId,
-                Name = model.Name,
-                Price = model.Price,
-                CategoryId = model.CategoryId,
-                OnSale = model.OnSale,
-                StockLevel = model.StockLevel,
-                Categories = model.Categories,
+                City_Id = model.City_Id,
+                State = model.Country_Code,
+                County = model.State,
+                Name = model.County,
+                Latitude = model.Latitude,
+                Longitude = model.Longitude
             };
 
             return location;

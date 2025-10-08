@@ -17,15 +17,15 @@ namespace EndangeredNearYou.Infrastructure.Services
         private readonly string _key;
 
         // Properties
-        private bool captive = false;
-        private bool identified = true;
-        private bool photos = true;
-        private bool taxon_is_active = true;
-        private bool threatened = true;
-        private string cs = "GX,GH,G1,G2,G3,VU,EN,CR,EW,EX"; // Conservation Status Codes
-        private string radius = "50";
-        private string quality_grade = "research";
-        private bool include_ancestors = false;
+        private const bool captive = false;
+        private const bool identified = true;
+        private const bool photos = true;
+        private const bool taxon_is_active = true;
+        private const bool threatened = true;
+        private const string cs = "GX,GH,G1,G2,G3,VU,EN,CR,EW,EX"; // Conservation Status Codes
+        private const string radius = "50";
+        private const string quality_grade = "research";
+        private const bool include_ancestors = false;
 
         // lat: 30.29123
         // lng: -87.586645

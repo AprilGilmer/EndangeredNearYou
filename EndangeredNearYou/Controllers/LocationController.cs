@@ -1,4 +1,5 @@
-﻿using EndangeredNearYou.Domain.Repositories;
+﻿using EndangeredNearYou.Domain.Interfaces;
+using EndangeredNearYou.Domain.Repositories;
 using EndangeredNearYou.Infrastructure.Classes;
 using EndangeredNearYou.Web.Helpers;
 using EndangeredNearYou.Web.Models;
@@ -17,16 +18,14 @@ namespace EndangeredNearYou.Web.Controllers
 
         public IActionResult Index()
         {
-            var locations = _locationRepository.GetAllLocations();
-            var models = ViewModelMapper.ToLocationViewModelList(locations);
-            return View(models);
+            var continents = _locationRepository.GetAllContinents();
+            return View(continents);
         }
 
         [HttpPost("Location/SaveLocation")]
         public IActionResult SaveLocation([FromBody] Location location)
         {
-            HttpContext.Session.SetString("UserLatitude", location.Latitude.ToString());
-            HttpContext.Session.SetString("UserLongitude", location.Longitude.ToString());
+            SetHttpContextLatLng(location);
 
             return Ok(new { message = "Location saved in session!" });
         }
@@ -55,13 +54,31 @@ namespace EndangeredNearYou.Web.Controllers
             return View(location);
         }
 
-        public IActionResult ViewLocation(int id)
-        {
-            var location = _locationRepository.GetLocationById(id);
-            var model = ViewModelMapper.ToLocationViewModel(location);
-            return View(location);
+        [HttpGet]
+        [Route("Location/ViewCountries/{continentCode}")]
+        public IActionResult ViewCountries(string continentCode)
+        { 
+            var countries = _locationRepository.GetCountriesByContinent(continentCode);
+            return View(countries);
         }
 
+        [HttpGet]
+        [Route("Location/ViewCitiesByCountry/{countryCode}")]
+        public IActionResult ViewCitiesByCountry(string countryCode)
+        {
+            var cities = _locationRepository.GetLocationsByCountry(countryCode);
+            var model = ViewModelMapper.ToLocationViewModelList(cities);
+            return View(model);
+        }
+
+        public IActionResult SelectLocation(int id)
+        {
+            var location = _locationRepository.GetLocationById(id);
+            SetHttpContextLatLng(location);
+            return RedirectToAction("Index", "Species");
+        }
+
+        [HttpPut]
         public IActionResult UpdateLocation(int id)
         {
             var location = _locationRepository.GetLocationById(id);
@@ -74,13 +91,14 @@ namespace EndangeredNearYou.Web.Controllers
 
         public IActionResult UpdateLocationToDatabase(LocationViewModel model)
         {
-            var location = _locationRepository.GetLocationById(model.LocationId);
+            var location = _locationRepository.GetLocationById(model.City_Id);
             _locationRepository.UpdateLocation(location);
 
             model = ViewModelMapper.ToLocationViewModel(location);
-            return RedirectToAction("ViewLocation", new { id = model.LocationId });
+            return RedirectToAction("ViewLocation", new { id = model.City_Id });
         }
 
+        [HttpPost]
         public IActionResult InsertLocation()
         {
             var location = _locationRepository.AssignCategory();
@@ -94,11 +112,18 @@ namespace EndangeredNearYou.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpDelete]
         public IActionResult DeleteLocation(LocationViewModel model)
         {
             var location = ViewModelMapper.ToLocationEntity(model);
             _locationRepository.DeleteLocation(location);
             return RedirectToAction("Index");
+        }
+
+        private void SetHttpContextLatLng(ILocation city)
+        {
+            HttpContext.Session.SetString("UserLatitude", city.Latitude.ToString());
+            HttpContext.Session.SetString("UserLongitude", city.Longitude.ToString());
         }
     }
 }

@@ -9,13 +9,49 @@
 }
 else
 {
-    <ul>
-        <li>@Model.taxon.name</li>
-        <li>@Model.taxon.observations_count</li>
-        <li>@Model.taxon.conservation_Status</li>
-        <li>@Model.taxon.default_photo.url</li>
-        <li>@Model.taxon.default_photo.attribution</li>
-        <li>@Model.taxon.preferred_common_name</li>
-        <li>@Model.taxon.extinct</li>
-    </ul>
+    @* Total width = 12. *@
+    <div class="col-lg-12">
+        <img src="@Model.taxon.default_photo.medium_url" class="species-banner-image"/>
+        <ul>
+            <li>@Model.taxon.default_photo.attribution</li>
+            <li>@Model.taxon.preferred_common_name</li>
+            <li>@Model.taxon.name</li>
+            <li>@Model.taxon.observations_count</li>
+            <li>@Model.taxon.extinct</li>
+            <li>@Model.taxon.conservation_Status.status</li>
+            <li>@Model.taxon.conservation_Status.status_name</li>
+            <li>@Model.taxon.conservation_Status.authority</li>
+        </ul>
+        @if (Model.taxon.conservation_Status.authority == "IUCN Red List")
+        {
+            <p>
+                “Established in 1964, the International Union for Conservation of Nature’s Red List (IUCN) of
+                Threatened Species has evolved to become the world’s most comprehensive information
+                source on the global extinction risk status of animal, fungus and plant species.”
+                <br />
+                <i>
+                    <a href="https://www.iucnredlist.org/about/background-history">
+                        — International Union for Conservation of Nature (IUCN), The IUCN Red List of Threatened Species – Background & History
+                    </a>
+                </i>
+            </p>
+        }
+        else if (Model.taxon.conservation_Status.authority == "NatureServe")
+        {
+            <p>
+                "For 50 years, NatureServe has been the authoritative source for biodiversity data throughout
+                North America.We work with 60 + network organizations and nearly 1, 000 conservation professionals to collect, analyze, and deliver biodiversity knowledge that informs conservation action."
+                <br />
+                <i>
+                    <a href="https://www.natureserve.org/who-we-are">
+                        — NatureServe, Global Conservation Status Ranks – Who We Are
+                    </a>
+                </i>
+            </p>
+        }
+        else
+        {
+            // Nothing?
+        }
+    </div>
 }

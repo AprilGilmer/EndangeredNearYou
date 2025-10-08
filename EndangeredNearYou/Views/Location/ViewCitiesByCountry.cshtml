@@ -1,0 +1,19 @@
+﻿@using EndangeredNearYou.Web.Models
+@model IEnumerable<LocationViewModel>
+
+<h3>Cities</h3>
+
+<table class="table">
+    <tr>
+        <th>City Name</th>
+        <th>State</th>
+    </tr>
+
+    @foreach (var location in @Model)
+    {
+        <tr>
+            <td><a href=/Location/SelectLocation/@location.City_Id>@location.Name</a></td>
+            <td>@location.State</td>
+        </tr>
+    }
+</table>
