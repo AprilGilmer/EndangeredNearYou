@@ -20,6 +20,8 @@ namespace EndangeredNearYou.Web.Controllers
         [Route("Species/Index")]
         public async Task<IActionResult> Index()
         {
+            ViewBag.LocationName = HttpContext.Session.GetString("UserLocationName");
+
             var latString = HttpContext.Session.GetString("UserLatitude");
             var lngString = HttpContext.Session.GetString("UserLongitude");
 
@@ -38,7 +40,9 @@ namespace EndangeredNearYou.Web.Controllers
         [HttpPost]
         public IActionResult Details(string speciesJson)
         {
-            var species = System.Text.Json.JsonSerializer.Deserialize<Observations_SpeciesCounts>(speciesJson);
+            ViewBag.LocationName = HttpContext.Session.GetString("UserLocationName");
+
+            var species = System.Text.Json.JsonSerializer.Deserialize<Observations_SpeciesCounts>(speciesJson); 
             return View(species);
         }
     }

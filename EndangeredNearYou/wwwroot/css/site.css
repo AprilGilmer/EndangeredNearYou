@@ -61,6 +61,11 @@ html {
   min-height: 100%;
 }
 
+html, body {
+    height: 100%;
+    margin: 0px;
+}
+
 body {
     margin-bottom: 60px;
     margin: 0;
@@ -73,8 +78,21 @@ body {
     background-color: #F2F1EC;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
+    display: flex;
+    flex-direction: column;
 }
 
+.content {
+    flex: 1;
+}
+
+td {
+    text-transform: capitalize;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
 
 .species-image-preview {
     width: 90px;
@@ -83,11 +101,26 @@ body {
 
 h2 {
     color: #D94F30 !important;
+    margin-bottom: 20px;
+}
+
+h5 {
+    text-transform: capitalize;
+}
+
+.text-abbreviation {
+    text-transform: uppercase;
 }
 
 .text-muted {
     --bs-text-opacity: 1;
     color: #0D0D0D !important;
+}
+
+.share-location {
+    padding: 40px;
+    text-align: center;
+    vertical-align: middle;
 }
 
 .table-hover {
@@ -96,15 +129,40 @@ h2 {
 }
 
 /*details page*/
+.species-title {
+    text-align: left;
+}
+
+.species-subtitle {
+    text-align: left;
+    color: #D94F30 !important;
+}
 
 .species-banner-image {
     border-radius: 6px;
     display: block;
-    max-width: 100%;
-    height: 350px;
+    width: 100%;
+    height: 100%;
     vertical-align: middle;
     border-style: none;
     overflow-clip-margin: content-box;
     overflow: clip;
     box-sizing: border-box;
+    object-fit: cover;
+}
+
+.image-attribution {
+    text-align: center;
+    color: #6c757d !important;
+}
+
+.no-species-found {
+    text-align: center;
+    margin: 60px;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 60px;
+    color: #6c757d !important;
 }

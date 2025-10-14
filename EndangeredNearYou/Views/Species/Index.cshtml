@@ -4,43 +4,66 @@
 <h2>Endangered Species</h2>
 
 <div style="display: block">
-    Below is a list of threatened species in your area.</a>
+    Below is a list of threatened species in @ViewBag.LocationName.
 </div>
 
-<table class="table">
-    <tr>
-        <th>Image</th>
-        <th>Common Name</th>
-        <th>Species</th>
-        <th>Conservation Status</th>
-    </tr>
 
-    @foreach (var species in @Model)
-    {
-        string json = System.Text.Json.JsonSerializer.Serialize(species);
-        string formId = $"form-{species.taxon.name}";
-
-        <form id="@formId" asp-controller="Species" asp-action="Details" method="post">
-            <input type="hidden" name="speciesJson" value='@json' />
-        </form>
-
-        string status;
-        if (species.taxon.conservation_Status != null)
-        {
-            status = species.taxon.conservation_Status.status_name;
-        }
-        else
-        {
-            status = "unavailable";
-        }
-        <tr onclick="document.getElementById('@formId').submit();">
-            <td><img src="@species.taxon.default_photo.square_url" class="species-image-preview" /></td>
-            <td>@species.taxon.preferred_common_name</td>
-            <td>@species.taxon.name</td>
-            <td>@status</td>
+@if (@Model.Count() <= 0)
+{
+    <div class="no-species-found">
+        <p><b> No endangered species documented for this location.</b></p>
+    </div>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>Image</th>
+            <th>Common Name</th>
+            <th>Species</th>
+            <th>Conservation Status</th>
         </tr>
-    }
-</table>
+
+        @foreach (var species in @Model)
+        {
+            string json = System.Text.Json.JsonSerializer.Serialize(species);
+            string formId = $"form-{species.taxon.name}";
+
+            <form id="@formId" asp-controller="Species" asp-action="Details" method="post">
+                <input type="hidden" name="speciesJson" value='@json' />
+            </form>
+
+            string status;
+            if (species.taxon.conservation_Status != null)
+            {
+                status = species.taxon.conservation_Status.status_name;
+            }
+            else
+            {
+                status = "Unavailable";
+            }
+
+            string commonName;
+            if (species.taxon.preferred_common_name == null)
+            {
+                commonName = "Unavailable";
+            }
+            else
+            {
+                commonName = species.taxon.preferred_common_name;
+            }
+
+            <tr onclick="document.getElementById('@formId').submit();">
+                <td><img src="@species.taxon.default_photo.square_url" class="species-image-preview" /></td>
+                <td>@commonName</td>
+                <td style="text-transform: none"><i>@species.taxon.name</i></td>
+                <td>@status</td>
+            </tr>
+        }
+    </table>
+}
+
+
 
 @section Scripts {
     <script>

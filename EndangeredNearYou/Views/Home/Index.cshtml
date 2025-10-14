@@ -2,35 +2,11 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
+<div class="text-center col-lg-12">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <img class="img-fluid" src="/images/48600-species.jpg">
+    <img src="/images/RedList-Logo.jpg">
+    <img src="/images/natureserve-logo.png">
+    <img src="/images/inaturalist-logo.svg">
+    <img src="/images/redlist-logo.svg">
 </div>
-
-<h2>Share Your Location</h2>
-
-<button class="btn" onclick="sendLocation()">Send My Location</button>
-
-<script type="text/javascript">
-    function sendLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function (position) {
-                fetch('/Location/SaveLocation', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        latitude: position.coords.latitude,
-                        longitude: position.coords.longitude
-                    })
-                })
-                .then(response => {
-                    if (response.ok) {
-                        alert("Location sent to server!");
-                    }
-                });
-            });
-        } else {
-            alert("Geolocation is not supported by this browser.");
-        }
-    }
-</script>

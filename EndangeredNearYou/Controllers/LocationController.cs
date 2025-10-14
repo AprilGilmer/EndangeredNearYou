@@ -22,10 +22,16 @@ namespace EndangeredNearYou.Web.Controllers
             return View(continents);
         }
 
+        public IActionResult ShareLocation()
+        {
+            return View();
+        }
+
         [HttpPost("Location/SaveLocation")]
         public IActionResult SaveLocation([FromBody] Location location)
         {
-            SetHttpContextLatLng(location);
+            location.Name = "your area";
+            SetHttpContextData(location);
 
             return Ok(new { message = "Location saved in session!" });
         }
@@ -46,12 +52,11 @@ namespace EndangeredNearYou.Web.Controllers
             return Content($"Your stored location: Lat={location.Latitude}, Lon={location.Longitude}");
         }
 
-        public IActionResult Random(int id)
+        public IActionResult Random()
         {
-            var location = _locationRepository.GetLocationById(id);
-            var model = ViewModelMapper.ToLocationViewModel(location);
-            //return RedirectToAction("Index");
-            return View(location);
+            var location = _locationRepository.GetRandomLocation();
+            SetHttpContextData(location);
+            return RedirectToAction("Index", "Species");
         }
 
         [HttpGet]
@@ -74,7 +79,7 @@ namespace EndangeredNearYou.Web.Controllers
         public IActionResult SelectLocation(int id)
         {
             var location = _locationRepository.GetLocationById(id);
-            SetHttpContextLatLng(location);
+            SetHttpContextData(location);
             return RedirectToAction("Index", "Species");
         }
 
@@ -120,8 +125,9 @@ namespace EndangeredNearYou.Web.Controllers
             return RedirectToAction("Index");
         }
 
-        private void SetHttpContextLatLng(ILocation city)
+        private void SetHttpContextData(ILocation city)
         {
+            HttpContext.Session.SetString("UserLocationName", city.Name);
             HttpContext.Session.SetString("UserLatitude", city.Latitude.ToString());
             HttpContext.Session.SetString("UserLongitude", city.Longitude.ToString());
         }

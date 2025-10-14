@@ -108,6 +108,7 @@
     <Compile Include="IDBConnection.cs" />
     <Compile Include="Entities\Location.cs" />
     <Compile Include="Interfaces\ILocation.cs" />
+    <Compile Include="Interfaces\ILocationRepository.cs" />
     <Compile Include="Repositories\LocationRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,24 +1,13 @@
 ﻿using Dapper;
 using EndangeredNearYou.Domain.Entities;
+using EndangeredNearYou.Domain.Interfaces;
 using EndangeredNearYou.Infrastructure.Classes;
+using System;
 using System.Collections.Generic;
 using System.Data;
 
 namespace EndangeredNearYou.Domain.Repositories
 {
-    public interface ILocationRepository
-    {
-        IEnumerable<Continent> GetAllContinents();
-        IEnumerable<Country> GetCountriesByContinent(string continent);
-        IEnumerable<Location> GetLocationsByCountry(string country);
-        Location GetLocationById(int id);
-        void UpdateLocation(Location location);
-        void InsertLocation(Location locationToInsert);
-        IEnumerable<Category> GetCategories();
-        Location AssignCategory();
-        void DeleteLocation(Location location);
-    }
-
     public class LocationRepository : ILocationRepository
     {
         private readonly IDbConnection _conn;
@@ -47,6 +36,14 @@ namespace EndangeredNearYou.Domain.Repositories
         public Location GetLocationById(int id)
         {
             return _conn.QuerySingle<Location>($"SELECT * FROM world_cities WHERE City_Id = @id", new { id });
+        }
+
+        public Location GetRandomLocation()
+        {
+            var total = _conn.QuerySingle<int>($"SELECT COUNT(*) FROM world_cities");
+            var random = new Random();
+            int id = random.Next(1, total + 1);
+            return GetLocationById(id);
         }
 
         public void UpdateLocation(Location location)

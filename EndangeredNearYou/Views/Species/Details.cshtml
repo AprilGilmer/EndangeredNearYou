@@ -1,18 +1,123 @@
 ﻿@using EndangeredNearYou.Infrastructure.Classes
 @model Observations_SpeciesCounts
 
-<h1>Species Details</h1>
-
 @if (@Model.taxon == null)
 {
     <h2>Unavailable</h2>
 }
 else
 {
-    @* Total width = 12. *@
+    string headingName;
+
+    if (string.IsNullOrEmpty(Model.taxon.preferred_common_name))
+    {
+        headingName = @Model.taxon.name;
+        <h1><i>@headingName</i></h1>
+    }
+    else
+    {
+        headingName = Model.taxon.preferred_common_name;
+        <h1 class="species-title capitalize">@headingName</h1>
+    }
+
     <div class="col-lg-12">
-        <img src="@Model.taxon.default_photo.medium_url" class="species-banner-image"/>
-        <ul>
+        <div class="row">
+            <div class="col-lg-6">
+                <img src="@Model.taxon.default_photo.medium_url" class="species-banner-image" />
+                <div class="image-attribution">
+                    <p>@Model.taxon.default_photo.attribution</p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                @if (headingName != Model.taxon.name)
+                {
+                    <div class="border-bottom">
+                        <h4 class="species-subtitle"><i>@Model.taxon.name</i></h4>
+                    </div>
+                    <br />
+                }
+                <h5>Conservation status</h5>
+                @if (Model.taxon.conservation_Status.authority == "IUCN Red List")
+                {
+                    <div>
+                        IUCN Red List Category and Criteria
+                        <br />
+                        <div class="row align-items-baseline border-bottom">
+                            <div class="col-auto text-abbreviation">
+                                <h1>@Model.taxon.conservation_Status.status</h1>
+                            </div>
+                            <div class="col-auto capitalize">
+                                @Model.taxon.conservation_Status.status_name
+                            </div>
+                        </div>
+
+                        <br />
+                        <div class="border-bottom">
+                            <h6>Total iNaturalist Sightings</h6>
+                            <h1>@Model.taxon.observations_count</h1>
+                        </div>
+                        <br />
+
+                        <p>
+                            “Established in 1964, the <b>International Union for Conservation of Nature’s Red List</b> (IUCN) of
+                            Threatened Species has evolved to become the world’s most comprehensive information
+                            source on the global extinction risk status of animal, fungus and plant species.”
+                            <br />
+                            <i>
+                                <a href="https://www.iucnredlist.org/about/background-history">
+                                    — International Union for Conservation of Nature (IUCN), The IUCN Red List of Threatened Species – Background & History
+                                </a>
+                            </i>
+                        </p>
+                    </div>
+                }
+                else if (Model.taxon.conservation_Status.authority == "NatureServe"
+                || Model.taxon.conservation_Status.authority == "USDA")
+                {
+                    <div>
+                        NatureServe Status
+                        <br />
+                        <div class="row align-items-baseline border-bottom">
+                            <div class="col-auto text-abbreviation">
+                                <h1>@Model.taxon.conservation_Status.status</h1>
+                            </div>
+                            @if (Model.taxon.conservation_Status.status_name != "Unavailable")
+                            {
+                                <div class="capitalize col-auto">
+                                    @Model.taxon.conservation_Status.status_name
+                                </div>
+                            }
+                        </div>
+
+                        <br />
+                        <div class="border-bottom">
+                            <h6>Total iNaturalist Sightings</h6>
+                            <h1>@Model.taxon.observations_count</h1>
+                        </div>
+                        <br />
+
+                        <p>
+                            "For 50 years, <b>NatureServe</b> has been the authoritative source for biodiversity data throughout
+                            North America. We work with 60+ network organizations and nearly 1,000 conservation professionals to collect, analyze, and deliver biodiversity knowledge that informs conservation action."
+                            <br />
+                            <i>
+                                <a href="https://www.natureserve.org/who-we-are">
+                                    — NatureServe, Global Conservation Status Ranks – Who We Are
+                                </a>
+                            </i>
+                        </p>
+                    </div>
+                }
+                else
+                {
+                    <div class="capitalize">
+                        <h6>Sightings in @ViewBag.LocationName</h6>
+                        <h1>@Model.taxon.observations_count</h1>
+                    </div>
+                }
+            </div>
+        </div>
+        @*         <ul>
             <li>@Model.taxon.default_photo.attribution</li>
             <li>@Model.taxon.preferred_common_name</li>
             <li>@Model.taxon.name</li>
@@ -21,37 +126,6 @@ else
             <li>@Model.taxon.conservation_Status.status</li>
             <li>@Model.taxon.conservation_Status.status_name</li>
             <li>@Model.taxon.conservation_Status.authority</li>
-        </ul>
-        @if (Model.taxon.conservation_Status.authority == "IUCN Red List")
-        {
-            <p>
-                “Established in 1964, the International Union for Conservation of Nature’s Red List (IUCN) of
-                Threatened Species has evolved to become the world’s most comprehensive information
-                source on the global extinction risk status of animal, fungus and plant species.”
-                <br />
-                <i>
-                    <a href="https://www.iucnredlist.org/about/background-history">
-                        — International Union for Conservation of Nature (IUCN), The IUCN Red List of Threatened Species – Background & History
-                    </a>
-                </i>
-            </p>
-        }
-        else if (Model.taxon.conservation_Status.authority == "NatureServe")
-        {
-            <p>
-                "For 50 years, NatureServe has been the authoritative source for biodiversity data throughout
-                North America.We work with 60 + network organizations and nearly 1, 000 conservation professionals to collect, analyze, and deliver biodiversity knowledge that informs conservation action."
-                <br />
-                <i>
-                    <a href="https://www.natureserve.org/who-we-are">
-                        — NatureServe, Global Conservation Status Ranks – Who We Are
-                    </a>
-                </i>
-            </p>
-        }
-        else
-        {
-            // Nothing?
-        }
+        </ul> *@
     </div>
 }

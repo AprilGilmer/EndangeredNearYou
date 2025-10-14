@@ -1,11 +1,6 @@
 ﻿using EndangeredNearYou.Infrastructure.Classes;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 
 namespace EndangeredNearYou.Infrastructure.Services
@@ -47,6 +42,49 @@ namespace EndangeredNearYou.Infrastructure.Services
             // Deserialize json
             var results = JObject.Parse(response).GetValue("results")?.ToString();
             var model = JsonConvert.DeserializeObject<List<Observations_SpeciesCounts>>(results);
+
+            if (model == null || model.Count() <= 0)
+            {
+                return model;
+            }
+            
+            // NatureServe status names are only showing as codes, so we are populating them manually
+            foreach (var species in model)
+            {
+                if (species.taxon.conservation_Status != null && !string.IsNullOrEmpty(species.taxon.conservation_Status.authority)
+                    && species.taxon.conservation_Status.authority.ToLower() != "iucn red list" && !string.IsNullOrEmpty(species.taxon.conservation_Status.status))
+                {
+                    switch (species.taxon.conservation_Status.status.ToUpper())
+                    {
+                        case "GX":
+                            species.taxon.conservation_Status.status_name = "Presumed Extinct";
+                            break;
+                        case "GH":
+                            species.taxon.conservation_Status.status_name = "Possibly Extinct";
+                            break;
+                        case "G1":
+                            species.taxon.conservation_Status.status_name = "Critically Imperiled";
+                            break;
+                        case "G2":
+                            species.taxon.conservation_Status.status_name = "Imperiled";
+                            break;
+                        case "G3":
+                            species.taxon.conservation_Status.status_name = "Vulnerable";
+                            break;
+                        case "G4":
+                            species.taxon.conservation_Status.status_name = "Apparently Secure";
+                            break;
+                        case "G5":
+                            species.taxon.conservation_Status.status_name = "Secure";
+                            break;
+                        case "":
+                            species.taxon.conservation_Status.status_name = "No Status Rank";
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
 
             return model.OrderBy(x => x.taxon.preferred_common_name).ToList();
         }

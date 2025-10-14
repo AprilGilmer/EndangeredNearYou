@@ -11,9 +11,19 @@
 
     @foreach (var location in @Model)
     {
+        var state = "";
+        if (string.IsNullOrEmpty(location.State))
+        {
+            state = "unavailable";
+        }
+        else
+        {
+            state = location.State;
+        }
+
         <tr>
             <td><a href=/Location/SelectLocation/@location.City_Id>@location.Name</a></td>
-            <td>@location.State</td>
+            <td>@state<td>
         </tr>
     }
 </table>
