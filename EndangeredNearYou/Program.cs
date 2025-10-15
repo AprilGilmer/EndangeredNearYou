@@ -1,3 +1,4 @@
+using EndangeredNearYou.Domain.Interfaces;
 using EndangeredNearYou.Domain.Repositories;
 using EndangeredNearYou.Infrastructure.Classes;
 using EndangeredNearYou.Infrastructure.Services;

@@ -37,95 +37,213 @@ else
                     <br />
                 }
                 <h5>Conservation status</h5>
-                @if (Model.taxon.conservation_Status.authority == "IUCN Red List")
+                @if (Model.taxon.conservation_Status == null)
                 {
-                    <div>
-                        IUCN Red List Category and Criteria
-                        <br />
-                        <div class="row align-items-baseline border-bottom">
-                            <div class="col-auto text-abbreviation">
-                                <h1>@Model.taxon.conservation_Status.status</h1>
-                            </div>
-                            <div class="col-auto capitalize">
-                                @Model.taxon.conservation_Status.status_name
-                            </div>
-                        </div>
+                    <div> Unavailable </div>
 
-                        <br />
-                        <div class="border-bottom">
-                            <h6>Total iNaturalist Sightings</h6>
-                            <h1>@Model.taxon.observations_count</h1>
-                        </div>
-                        <br />
-
-                        <p>
-                            “Established in 1964, the <b>International Union for Conservation of Nature’s Red List</b> (IUCN) of
-                            Threatened Species has evolved to become the world’s most comprehensive information
-                            source on the global extinction risk status of animal, fungus and plant species.”
-                            <br />
-                            <i>
-                                <a href="https://www.iucnredlist.org/about/background-history">
-                                    — International Union for Conservation of Nature (IUCN), The IUCN Red List of Threatened Species – Background & History
-                                </a>
-                            </i>
-                        </p>
+                    <br />
+                    <div class="border-bottom">
+                        <h6>Total iNaturalist Sightings</h6>
+                        <h1>@Model.taxon.observations_count</h1>
                     </div>
-                }
-                else if (Model.taxon.conservation_Status.authority == "NatureServe"
-                || Model.taxon.conservation_Status.authority == "USDA")
-                {
-                    <div>
-                        NatureServe Status
-                        <br />
-                        <div class="row align-items-baseline border-bottom">
-                            <div class="col-auto text-abbreviation">
-                                <h1>@Model.taxon.conservation_Status.status</h1>
-                            </div>
-                            @if (Model.taxon.conservation_Status.status_name != "Unavailable")
-                            {
-                                <div class="capitalize col-auto">
-                                    @Model.taxon.conservation_Status.status_name
-                                </div>
-                            }
-                        </div>
-
-                        <br />
-                        <div class="border-bottom">
-                            <h6>Total iNaturalist Sightings</h6>
-                            <h1>@Model.taxon.observations_count</h1>
-                        </div>
-                        <br />
-
-                        <p>
-                            "For 50 years, <b>NatureServe</b> has been the authoritative source for biodiversity data throughout
-                            North America. We work with 60+ network organizations and nearly 1,000 conservation professionals to collect, analyze, and deliver biodiversity knowledge that informs conservation action."
-                            <br />
-                            <i>
-                                <a href="https://www.natureserve.org/who-we-are">
-                                    — NatureServe, Global Conservation Status Ranks – Who We Are
-                                </a>
-                            </i>
-                        </p>
-                    </div>
+                    <br />
                 }
                 else
                 {
-                    <div class="capitalize">
-                        <h6>Sightings in @ViewBag.LocationName</h6>
-                        <h1>@Model.taxon.observations_count</h1>
-                    </div>
+                    @if (Model.taxon.conservation_Status.authority == "IUCN Red List")
+                    {
+                        <div>
+                            IUCN Red List Category and Criteria
+                            <br />
+                            <div class="row align-items-baseline">
+                                <div class="col-auto text-abbreviation">
+                                    <h1>@Model.taxon.conservation_Status.status</h1>
+                                </div>
+                                <div class="col-auto capitalize">
+                                    @Model.taxon.conservation_Status.status_name
+                                </div>
+                            </div>
+
+                            <div class="border-top border-bottom" style="padding-top: 22px;">
+                                <h6>Total iNaturalist Sightings</h6>
+                                <h1>@Model.taxon.observations_count</h1>
+                            </div>
+                            <br />
+
+                            <p>
+                                “Established in 1964, the <b>International Union for Conservation of Nature’s Red List</b> (IUCN) of
+                                Threatened Species has evolved to become the world’s most comprehensive information
+                                source on the global extinction risk status of animal, fungus and plant species.”
+                                <br />
+                                <i>
+                                    <a href="https://www.iucnredlist.org/about/background-history" target="_blank">
+                                        — International Union for Conservation of Nature (IUCN), The IUCN Red List of Threatened Species – Background & History
+                                    </a>
+                                </i>
+                            </p>
+                            <div class="conservation-status-container">
+                                <img src="/images/iucn-categories.png" class="conservation-status-image" />
+                            </div>
+                        </div>
+                    }
+                    else if (Model.taxon.conservation_Status.authority == "NatureServe"
+                    || Model.taxon.conservation_Status.authority == "USDA")
+                    {
+                        <div>
+                            NatureServe Status
+                            <br />
+                            <div class="row align-items-baseline">
+                                <div class="col-auto text-abbreviation">
+                                    <h1>@Model.taxon.conservation_Status.status</h1>
+                                </div>
+                                @if (Model.taxon.conservation_Status.status_name != "Unavailable")
+                                {
+                                    <div class="capitalize col-auto">
+                                        @Model.taxon.conservation_Status.status_name
+                                    </div>
+                                }
+                            </div>
+
+                            <div class="border-top border-bottom" style="padding-top: 22px;">
+                                <h6>Total iNaturalist Sightings</h6>
+                                <h1>@Model.taxon.observations_count</h1>
+                            </div>
+                            <br />
+
+                            <p>
+                                "For 50 years, <b>NatureServe</b> has been the authoritative source for biodiversity data throughout
+                                North America. We work with 60+ network organizations and nearly 1,000 conservation professionals to collect, analyze, and deliver biodiversity knowledge that informs conservation action."
+                                <br />
+                                <i>
+                                    <a href="https://www.natureserve.org/who-we-are" target="_blank">
+                                        — NatureServe, Global Conservation Status Ranks – Who We Are
+                                    </a>
+                                </i>
+                            </p>
+                            <div class="conservation-status-container">
+                                <img src="/images/natureserve-categories.png" class="conservation-status-image" />
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="border-top border-bottom" style="padding-top: 22px;">
+                            <h6>Total iNaturalist Sightings</h6>
+                            <h1>@Model.taxon.observations_count</h1>
+                        </div>
+                    }
                 }
+
             </div>
         </div>
-        @*         <ul>
-            <li>@Model.taxon.default_photo.attribution</li>
-            <li>@Model.taxon.preferred_common_name</li>
-            <li>@Model.taxon.name</li>
-            <li>@Model.taxon.observations_count</li>
-            <li>@Model.taxon.extinct</li>
-            <li>@Model.taxon.conservation_Status.status</li>
-            <li>@Model.taxon.conservation_Status.status_name</li>
-            <li>@Model.taxon.conservation_Status.authority</li>
-        </ul> *@
+        <div class="col-lg-12 margin-top-50">
+            <h3 style="margin-bottom: 16px;">Category Details</h3>
+        </div>
+        @if (Model.taxon.conservation_Status.authority == "IUCN Red List")
+        {
+            <div class="row">
+                <div class="col-lg-3">
+                    <b>Least Concern (LC)</b> —
+                    <br />
+                    When a species has been evaluated against the Red List criteria and does not qualify for Critically Endangered, Endangered, Vulnerable or Near Threatened.
+                </div>
+                <div class="col-lg-3">
+                    <b>Near Threatened (NT)</b> —
+                    <br />
+                    When a species has been evaluated against the criteria but does not qualify for a threatened category in the near future.
+                </div>
+                <div class="col-lg-3">
+                    <b>Vulnerable (VU)</b> —
+                    <br />
+                    When the best available evidence indicates that a species meets any of the criteria A to E for Vulnerable, and it is therefore considered to be facing a high risk of extinction in the wild.
+                </div>
+                <div class="col-lg-3">
+                    <b>Endangered (EN)</b> —
+                    <br />
+                    When the best available evidence indicates that a species meets any of the criteria A to E for Endangered, and it is therefore considered to be facing a very high risk of extinction in the wild.
+                </div>
+            </div>
+            <div class="row margin-top-30">
+                <div class="col-lg-3">
+                    <b>Critically Endangered (CR)</b> —
+                    <br />
+                    When the best available evidence indicates that a species meets any of the criteria A to E for Critically Endangered, and it is therefore considered to be facing an extremely high risk of extinction in the wild.
+                </div>
+                <div class="col-lg-3">
+                    <b>Extinct in the Wild (EW)</b> —
+                    <br />
+                    When a species is known only to survive in cultivation, in captivity or as a naturalized population (or populations) well outside the past range.
+                    A taxon is presumed Extinct in the Wild when exhaustive surveys in known and/or expected habitat, at appropriate times (diurnal, seasonal, annual), throughout its historic range
+                    have failed to record an individual. Surveys should be over a time frame appropriate to the taxon's life cycle and life form.
+                </div>
+                <div class="col-lg-3">
+                    <b>Extinct (EX)</b> —
+                    <br />
+                    When there is no reasonable doubt that the last individual has died.
+                    A species is presumed Extinct when exhaustive surveys in known and/or expected habitat, at appropriate times (diurnal, seasonal, annual), throughout its historic range have
+                    failed to record an individual. Surveys should be over a time frame appropriate to the taxon's life cycle and life form.
+                </div>
+                <div class="col-lg-3">
+                    <b>Data Deficient (DD)</b> —
+                    <br />
+                    When there is inadequate information to make a direct, or indirect, assessment of a species' risk of extinction based on its distribution and/or population status.
+                    A species in this category may be well studied, and its biology well known, but appropriate data on abundance and/or distribution are lacking.
+                </div>
+            </div>
+        }
+        else if (Model.taxon.conservation_Status.authority == "NatureServe"
+        || Model.taxon.conservation_Status.authority == "USDA")
+        {
+            <div class="row">
+                <div class="col-lg-3">
+                    <b>Secure (G5/S5/N5)</b> —
+                    <br />
+                    At very low risk or extinction or collapse due to a very extensive range, abundant populations or occurrences, and little to no concern from declines or threats.
+                </div>
+                <div class="col-lg-3">
+                    <b>Apparently Secure (G4/S4/N4)</b> —
+                    <br />
+                    At fairly low risk of extinction or collapse due to an extensive range and/or many populations or occurrences, but with possible cause for some concern as a result of
+                    local recent declines, threats, or other factors.
+                </div>
+                <div class="col-lg-3">
+                    <b>Vulnerable (G3/S3/N3)</b> —
+                    <br />
+                    At moderate risk of extinction or collapse due to a fairly restricted range, relatively few populations or occurrences, recent and widespread declines,
+                    threats, or other factors.
+                </div>
+                <div class="col-lg-3">
+                    <b>Imperiled (G2/S2/N2)</b> —
+                    <br />
+                    At high risk of extinction or collapse due to restricted range, few populations or occurrences, steep declines, severe threats, or other factors.
+                </div>
+            </div>
+            <div class="row margin-top-30">
+                <div class="col-lg-3">
+                    <b>Critically Imperiled (G1/S1/N1)</b> —
+                    <br />
+                    At very high risk of extinction or collapse due to very restricted range, very few populations or occurrences, very steep declines, very severe threats, or other factors.
+                </div>
+                <div class="col-lg-3">
+                    <b>Possibly Extinct (GH/SH/NH)</b> — 
+                    <br/>
+                    Known from only historical occurrences but still some hope of rediscovery.  Examples of evidence include (1) that a species has not been documented in approximately 
+                    20-40 years in human-dominated landscapes despite some searching and/or some evidence of significant habitat loss or degradation; (2) that a species or ecosystem has been searched for unsuccessfully, 
+                    but not thoroughly enough to presume that it is extinct or collapsed throughout its range.
+                </div>
+                <div class="col-lg-3">
+                    <b>Presumed Extinct (GX/SX/NX)</b> —
+                    <br />
+                    Not located despite intensive searches and virtually no likelihood of rediscovery
+                </div>
+                <div class="col-lg-3">
+                    <b>Unranked (GNR/SNR/NNR)</b> —
+                    <br />
+                    Global, National, or subnational conservation status not yet assessed.
+                </div>
+            </div>
+        }
+
+
     </div>
 }

@@ -1,3 +1,7 @@
+
+
+/*-------------------   bootstrap overrides   ----------------------*/
+
 .navbar {
     position: relative;
     display: flex;
@@ -6,11 +10,7 @@
     justify-content: space-between;
     padding-top: .5rem;
     padding-bottom: .5rem;
-    background-color: #197487;
-}
-
-.bg-white {
-    background-color: #D6D9C5 !important;
+    background-color: #D6D9C5;
 }
 
 element.style {
@@ -20,12 +20,12 @@ element.style {
     color: #0D0D0D;
 }
 
-.navbar-light .navbar-brand {
-    color: #D94F30;
+.nav-link:hover {
+    color: #D94F30 !important;
 }
 
-a:hover {
-    color: #198754;
+.navbar-light .navbar-brand {
+    color: #D94F30;
 }
 
 .navbar-brand {
@@ -37,28 +37,42 @@ a:hover {
     white-space: nowrap;
 }
 
-html {
-    font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
 .btn, .btn:active {
     background-color: #D94F30;
 }
 
-    .btn:hover, .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-        box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #D9886A;
-        background-color: #D6D9C5;
+.btn:hover, .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #D9886A;
+    background-color: #D6D9C5;
+}
+
+a:link, a:active, a:visited {
+    color: #e7917e;
+}
+
+a:hover {
+    color: #D94F30;
+}
+
+h2 {
+    color: #D94F30 !important;
+    margin-bottom: 20px;
+}
+
+h5 {
+    text-transform: capitalize;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
     }
+}
 
 html {
-  position: relative;
-  min-height: 100%;
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
 }
 
 html, body {
@@ -90,22 +104,137 @@ td {
     text-transform: capitalize;
 }
 
+.table {
+    border-color: #D6D9C5 !important;
+}
+
+.border-top {
+    border-color: #D6D9C5 !important;
+    border-width: 0.2em !important;
+}
+
+.border-bottom {
+    border-color: #D6D9C5 !important;
+    border-width: 0.2em !important;
+}
+
+.footer-container {
+    margin-top: 60px;
+}
+
+.footer {
+    padding: 8px;
+    text-align: center;
+    color: #6c757d !important;
+    background: #D6D9C5;
+}
+
 .capitalize {
     text-transform: capitalize;
 }
 
+.uppercase {
+    text-transform: uppercase;
+}
+
+.padding-50 {
+    padding: 50px !important;
+}
+
+.margin-top-50 {
+    margin-top: 50px !important;
+}
+
+.margin-top-30 {
+    margin-top: 30px !important;
+}
+
+/*-------------------   Home page   ----------------------*/
+.endangered-near-me-logo {
+    height: auto;
+    width: 50%;
+    margin-bottom: 10px;
+}
+
+.endangered-near-me-bg {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    color: #F2F1EC;
+    padding: 40px;
+    background-image: url('/images/white-pitcher-plant.jpg');
+    background-color: #2f33373d;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-clip: padding-box;
+    background-blend-mode: overlay;
+}
+
+.endangered-near-me-text {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    object-fit: contain;
+}
+
+.endangered-near-me-text-container {
+    padding: 50px;
+    margin: 90px;
+    background: #2f3337bf;
+    border-radius: 20px;
+}
+
+.banner-image {
+    display: flex;
+    height: 100%;
+    width: auto;
+    padding: 20px;
+    background-image: url('/images/48600-species.jpbodyg');
+    background-color: #dc6b3b;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.resource-panel {
+    display: flex;
+    color: #F2F1EC;
+    height: 600px;
+    align-items: center;
+    padding: 40px;
+    background-color: #2f33373d;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-clip: padding-box;
+    background-blend-mode: overlay;
+}
+
+.resource-panel-text {
+    padding: 10px;
+    background: #2f3337bf;
+    border-radius: 6px;
+}
+
+.organization-images {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+.organization-images-2 {
+    height: 100px;
+    width: auto;
+    margin: 25px;
+    max-width: 400px;
+}
+
+/*-------------------   Species page   ----------------------*/
+
 .species-image-preview {
     width: 90px;
     height: 90px;
-}
-
-h2 {
-    color: #D94F30 !important;
-    margin-bottom: 20px;
-}
-
-h5 {
-    text-transform: capitalize;
 }
 
 .text-abbreviation {
@@ -124,11 +253,11 @@ h5 {
 }
 
 .table-hover {
-    background-color: #f2f2f2 !important; /* highlight color */
+    background-color: #f3c8be !important; /* highlight color */
     cursor: pointer !important;
 }
 
-/*details page*/
+/*-------------------   Details page   ----------------------*/
 .species-title {
     text-align: left;
 }
@@ -161,8 +290,17 @@ h5 {
     margin: 60px;
 }
 
-.footer {
-    text-align: center;
-    margin-top: 60px;
-    color: #6c757d !important;
+.conservation-status-container {
+    display: flex;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    text-align: left;
+    justify-content: flex-start;
+}
+
+.conservation-status-image {
+    height: auto;
+    width: 85%;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
