@@ -1,8 +1,6 @@
 ﻿using EndangeredNearYou.Domain.Interfaces;
-using EndangeredNearYou.Domain.Repositories;
 using EndangeredNearYou.Infrastructure.Classes;
 using EndangeredNearYou.Web.Helpers;
-using EndangeredNearYou.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
@@ -92,37 +90,6 @@ namespace EndangeredNearYou.Web.Controllers
                 return View("LocationNotFound");
             }
             return View(location);
-        }
-
-        public IActionResult UpdateLocationToDatabase(LocationViewModel model)
-        {
-            var location = _locationRepository.GetLocationById(model.City_Id);
-            _locationRepository.UpdateLocation(location);
-
-            model = ViewModelMapper.ToLocationViewModel(location);
-            return RedirectToAction("ViewLocation", new { id = model.City_Id });
-        }
-
-        [HttpPost]
-        public IActionResult InsertLocation()
-        {
-            var location = _locationRepository.AssignCategory();
-            return View(location);
-        }
-
-        public IActionResult InsertLocationToDatabase(LocationViewModel model)
-        {
-            var location = ViewModelMapper.ToLocationEntity(model);
-            _locationRepository.InsertLocation(location);
-            return RedirectToAction("Index");
-        }
-
-        [HttpDelete]
-        public IActionResult DeleteLocation(LocationViewModel model)
-        {
-            var location = ViewModelMapper.ToLocationEntity(model);
-            _locationRepository.DeleteLocation(location);
-            return RedirectToAction("Index");
         }
 
         private void SetHttpContextData(ILocation city)

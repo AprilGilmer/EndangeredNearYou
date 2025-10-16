@@ -22,8 +22,6 @@ namespace EndangeredNearYou.Infrastructure.Services
         private const string quality_grade = "research";
         private const bool include_ancestors = false;
 
-        // lat: 30.29123
-        // lng: -87.586645
         //CURL: curl -X GET --header 'Accept: application/json' 'https://api.inaturalist.org/v1/observations/species_counts?captive=false&identified=true&photos=true&threatened=true&hrank=genus&lrank=subspecies&lat=80.543643&lng=43.125445&radius=80&quality_grade=research&include_ancestors=false'
 
         // Constructor

@@ -11,10 +11,5 @@ namespace EndangeredNearYou.Domain.Interfaces
         IEnumerable<Location> GetLocationsByCountry(string country);
         Location GetLocationById(int id);
         Location GetRandomLocation();
-        void UpdateLocation(Location location);
-        void InsertLocation(Location locationToInsert);
-        IEnumerable<Category> GetCategories();
-        Location AssignCategory();
-        void DeleteLocation(Location location);
     }
 }

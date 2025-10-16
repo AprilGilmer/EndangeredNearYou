@@ -45,59 +45,5 @@ namespace EndangeredNearYou.Domain.Repositories
             int id = random.Next(1, total + 1);
             return GetLocationById(id);
         }
-
-        public void UpdateLocation(Location location)
-        {
-            _conn.Execute("UPDATE world_cities SET Name = @name, Price = @price WHERE cityId = @id",
-             new
-             {
-                 name = location.State,
-                 price = location.County,
-                 id = location.City_Id
-             });
-        }
-
-        public void InsertLocation(Location locationToInsert)
-        {
-            _conn.Execute("INSERT INTO world_cities (NAME, PRICE, CATEGORYID) VALUES (@name, @price, @categoryID);",
-                new
-                {
-                    name = locationToInsert.State,
-                    price = locationToInsert.County,
-                    categoryID = locationToInsert.Name
-                });
-        }
-
-        public IEnumerable<Category> GetCategories()
-        {
-            return _conn.Query<Category>("SELECT * FROM categories;");
-        }
-
-        public Location AssignCategory()
-        {
-            var categoryList = GetCategories();
-            var location = new Location();
-
-            return location;
-        }
-
-        public void DeleteLocation(Location location)
-        {
-            _conn.Execute("DELETE FROM REVIEWS WHERE cityId = @id;",
-                new
-                {
-                    id = location.City_Id
-                });
-            _conn.Execute("DELETE FROM Sales WHERE cityId = @id;",
-                new
-                {
-                    id = location.City_Id
-                });
-            _conn.Execute("DELETE FROM world_cities WHERE cityId = @id;",
-                new
-                {
-                    id = location.City_Id
-                });
-        }
     }
 }
