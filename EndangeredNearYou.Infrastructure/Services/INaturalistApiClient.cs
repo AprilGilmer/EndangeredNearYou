@@ -33,16 +33,16 @@ namespace EndangeredNearYou.Infrastructure.Services
 
         public async Task<List<Observations_SpeciesCounts>> GetObservations_SpeciesCountsAsync(double lat, double lng)
         {
-            // Build the URL to send Http Requests to
+            // Build the API URL
             var url = $"https://api.inaturalist.org/v1/observations/species_counts?captive={captive}&identified={identified}&photos={photos}&taxon_is_active={taxon_is_active}&threatened={threatened}&cs={cs}&lat={lat}&lng={lng}&radius={radius}&quality_grade={quality_grade}&include_ancestors={include_ancestors}".ToLower();
 
             // Encode the URL due to question marks causing errors when making requests
             var encodedUrl = HttpUtility.UrlEncode(url);
 
-            // Send request and recieve response from API
+            // Send the request to the API URL and then recieve the response
             var response = _httpClient.GetStringAsync(url).Result;
 
-            // Deserialize json
+            // Deserialize the response json to our classes
             var results = JObject.Parse(response).GetValue("results")?.ToString();
             var model = JsonConvert.DeserializeObject<List<Observations_SpeciesCounts>>(results);
 
@@ -50,8 +50,8 @@ namespace EndangeredNearYou.Infrastructure.Services
             {
                 return model;
             }
-            
-            // NatureServe status names are only showing as codes, so we are populating the names manually based on the code
+
+            //  Populate the conservation names based on the codes since the NatureServe species don't have status names
             foreach (var species in model)
             {
                 if (species.taxon.conservation_Status != null && !string.IsNullOrEmpty(species.taxon.conservation_Status.authority)
@@ -88,7 +88,7 @@ namespace EndangeredNearYou.Infrastructure.Services
                     }
                 }
             }
-
+            // LINQ used to order species by common name
             return model.OrderBy(x => x.taxon.preferred_common_name).ToList();
         }
     }

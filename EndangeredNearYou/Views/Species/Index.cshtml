@@ -8,13 +8,14 @@
 </div>
 
 
+@* If the model doesn't have any species, then display... *@
 @if (@Model.Count() <= 0)
 {
     <div class="no-species-found">
         <p><b> No endangered species documented for this location.</b></p>
     </div>
 }
-else
+else // If it has species, then display them in a table
 {
     <table class="table">
         <tr>
@@ -53,6 +54,7 @@ else
                 commonName = species.taxon.preferred_common_name;
             }
 
+            @* HTML that allows the user to click on a row to view the species details page *@
             <tr onclick="document.getElementById('@formId').submit();">
                 <td><img src="@species.taxon.default_photo.square_url" class="species-image-preview" /></td>
                 <td>@commonName</td>
@@ -63,8 +65,7 @@ else
     </table>
 }
 
-
-
+@*JavaScript for highlighting the row on hover*@
 @section Scripts {
     <script>
         $(document).ready(function() {

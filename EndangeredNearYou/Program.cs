@@ -18,6 +18,7 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+// Add database connection to services
 builder.Services.AddScoped<IDbConnection>((s) =>
 {
     IDbConnection conn = new MySqlConnection(builder.Configuration.GetConnectionString("endangered_near_you"));
@@ -25,14 +26,17 @@ builder.Services.AddScoped<IDbConnection>((s) =>
     return conn;
 });
 
+// Add & configure app settings api keys
 builder.Services.Configure<AppSettings>(
     builder.Configuration.GetSection("ApiKeys"));
 
-// Add services & repositories
+// Add iNaturalist API client to services
 builder.Services.AddHttpClient<INaturalistApiClient>(client =>
 {
     client.DefaultRequestHeaders.Add("Accept", "application/json");
 });
+
+// Add Location Repository to services
 builder.Services.AddTransient<ILocationRepository, LocationRepository>();
 
 var app = builder.Build();

@@ -2,7 +2,6 @@
 using EndangeredNearYou.Infrastructure.Classes;
 using EndangeredNearYou.Web.Helpers;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
 
 namespace EndangeredNearYou.Web.Controllers
 {
@@ -34,22 +33,6 @@ namespace EndangeredNearYou.Web.Controllers
             return Ok(new { message = "Location saved in session!" });
         }
 
-        [HttpGet]
-        public IActionResult ShowLocation()
-        {
-            var latitude = HttpContext.Session.GetString("UserLatitude");
-            var longitude = HttpContext.Session.GetString("UserLongitude");
-
-            var json = HttpContext.Session.GetString("UserLocation");
-            if (json == null)
-            {
-                return Content("No location stored for this session.");
-            }
-
-            var location = JsonSerializer.Deserialize<Location>(json);
-            return Content($"Your stored location: Lat={location.Latitude}, Lon={location.Longitude}");
-        }
-
         public IActionResult Random()
         {
             var location = _locationRepository.GetRandomLocation();
@@ -76,20 +59,11 @@ namespace EndangeredNearYou.Web.Controllers
 
         public IActionResult SelectLocation(int id)
         {
+            // When the user selects a city, the coordinates are used in the iNaturalist API call
+            // Then they are redirected to the table of species displayed in the index of the species controller
             var location = _locationRepository.GetLocationById(id);
             SetHttpContextData(location);
             return RedirectToAction("Index", "Species");
-        }
-
-        [HttpPut]
-        public IActionResult UpdateLocation(int id)
-        {
-            var location = _locationRepository.GetLocationById(id);
-            if (location == null)
-            {
-                return View("LocationNotFound");
-            }
-            return View(location);
         }
 
         private void SetHttpContextData(ILocation city)

@@ -40,9 +40,10 @@ namespace EndangeredNearYou.Web.Controllers
         [HttpPost]
         public IActionResult Details(string speciesJson)
         {
-            ViewBag.LocationName = HttpContext.Session.GetString("UserLocationName");
-
+            // Deserialize the json that was sent when the user clicked on the species row
             var species = System.Text.Json.JsonSerializer.Deserialize<Observations_SpeciesCounts>(speciesJson); 
+
+            // Return it in the view
             return View(species);
         }
     }

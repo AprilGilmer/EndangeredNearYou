@@ -40,9 +40,12 @@ namespace EndangeredNearYou.Domain.Repositories
 
         public Location GetRandomLocation()
         {
+            // Query the total # of cities in the cities table
             var total = _conn.QuerySingle<int>($"SELECT COUNT(*) FROM world_cities");
             var random = new Random();
+            // Pick a random number between 1 & the total # of cities in the table
             int id = random.Next(1, total + 1);
+            // Call the get location by id method using the random # as the location id
             return GetLocationById(id);
         }
     }
