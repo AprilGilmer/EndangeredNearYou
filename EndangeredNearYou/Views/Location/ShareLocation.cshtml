@@ -9,7 +9,7 @@
         // If there is a location, then get the current position
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
-                // Send location data as json to the save location method of the location controller
+                // Send location data as json to the save location method of the Location Controller
                 fetch('/Location/SaveLocation', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -22,7 +22,7 @@
                     if (response.ok) {
                         // Alert pop up tells user save location was successful
                         alert("Location sent to server. You will now be redirected to your area's results.");
-                        // User is redirected to index method of species controller
+                        // User is redirected to index method of Species Controller
                         window.location.href = '/Species/Index';
                     } else {
                         alert("Failed to send location to server.");

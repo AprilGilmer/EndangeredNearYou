@@ -7,12 +7,13 @@ namespace EndangeredNearYou.Web.Controllers
 {
     public class SpeciesController : Controller
     {
+        // Dependency Injection
         private readonly AppSettings _appSettings;
         private readonly INaturalistApiClient _iNaturalistApiClient;
 
-        public SpeciesController(IOptions<AppSettings> key)
+        public SpeciesController(IOptions<AppSettings> apiKey)
         {
-            _appSettings = key.Value;
+            _appSettings = apiKey.Value;
             var client = new HttpClient();
             _iNaturalistApiClient = new INaturalistApiClient(client, _appSettings);
         }
